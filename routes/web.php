@@ -20,7 +20,9 @@ Route::get('/', function () {
 Route::get('/users', function () {
 //    sleep(2);
     return Inertia::render('Users',[
-        'time'=>now()->toTimeString()
+        'users'=>\App\Models\User::all()->map(fn($users)=>[
+            'name'=>$users->name,
+        ])
     ]);
 });
 Route::get('/settings', function () {
