@@ -20,9 +20,14 @@ Route::get('/', function () {
 Route::get('/users', function () {
 //    sleep(2);
     return Inertia::render('Users',[
-        'users'=>\App\Models\User::all()->map(fn($users)=>[
+        'users'=>\App\Models\User::orderBy("id",'desc')->paginate(10)->through(fn($users)=>[
+            'id'=>$users->id,
             'name'=>$users->name,
         ])
+        /*'users'=>\App\Models\User::paginate(10)->map(fn($users)=>[
+            'id'=>$users->id,
+            'name'=>$users->name,
+        ])*/
     ]);
 });
 Route::get('/settings', function () {

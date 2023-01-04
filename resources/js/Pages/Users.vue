@@ -1,38 +1,38 @@
 <template>
-    <Head title="Users"/>
+    <Head title="Users"></Head>
     <h1 class="text-4xl font-bold">Users</h1>
-    <table class="table-fixed">
+    <table class="border table table-auto w-full">
         <thead>
         <tr>
-            <th>Song</th>
-            <th>Artist</th>
-            <th>Year</th>
+            <!--            <th class="border px-4 py-2">#</th>-->
+            <th class="border px-4 py-2">Name</th>
+            <th class="border px-4 py-2">Actions</th>
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td>The Sliding Mr. Bones (Next Stop, Pottersville)</td>
-            <td>Malcolm Lockyer</td>
-            <td>1961</td>
-        </tr>
-        <tr>
-            <td>Witchy Woman</td>
-            <td>The Eagles</td>
-            <td>1972</td>
-        </tr>
-        <tr>
-            <td>Shining Star</td>
-            <td>Earth, Wind, and Fire</td>
-            <td>1975</td>
+        <tr v-for="(user,index) in users.data" :key="user.id">
+            <!--            <td class="border px-4 py-2 w-5 text-center">{{ index + 1 }}</td>-->
+            <td class="border px-4 py-2">
+                <div>
+                    <div class="text-sm font-medium text-gray-900">
+                        {{ user.name }}
+                    </div>
+                </div>
+            </td>
+            <td class="border px-4 py-2 whitespace-nowrap text-center text-sm font-medium w-10">
+                <Link :href="`/users/${user.id}/edit`" href="" class="text-indigo-600 hover:text-indigo-900">Edit</Link>
+            </td>
         </tr>
         </tbody>
     </table>
-    <ul>
-        <li v-for="user in users" :key="user.id" v-text="user.name"></li>
-    </ul>
+    <!--paginator start-->
+    <Pagination :links="users.links" class="mt-6"/>
+    <!--paginator end-->
 
 </template>
 <script setup>
-defineProps({users:Array})
+import Pagination from "../Shared/Pagination.vue";
+
+defineProps({users: Object})
 
 </script>
