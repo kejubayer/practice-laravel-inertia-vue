@@ -42,7 +42,7 @@ Route::get('/users', function () {
 Route::post('/users', function () {
     $inputs=Request::validate([
        "name"=>"required",
-       "email"=>["required","email"],
+       "email"=>["required","email","unique:users,email"],
        "password"=>"required",
     ]);
    /* \App\Models\User::create([
